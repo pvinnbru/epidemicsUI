@@ -1,0 +1,4 @@
+<div style="padding: 15px">
+    <app-infection-rate *ngIf="fileContent['Pathogens'][this.pathogen] !== undefined" [fileContent]="fileContent"></app-infection-rate>
+    <app-age-matrix *ngIf="fileContent['Pathogens'][this.pathogen] !== undefined" [fileContent]="fileContent"></app-age-matrix>
+    </div>

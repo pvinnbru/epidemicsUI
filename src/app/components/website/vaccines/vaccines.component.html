@@ -1,0 +1,44 @@
+<div (click) = "setProperty('Waning')">
+    <h2>General Parameters</h2>
+    <div class="form-container">
+        <label>Waning:</label>
+        <app-dropdown [list]="hero2" [isRequired]="true" #waningtype
+            [parameter]="getWaningType(fileContent['Vaccines']['Antitest']['waning']['waning'])"
+            [location]="'Vaccines.Antitest.waning.waning'" [fileContent]="fileContent"></app-dropdown>
+        
+    </div>
+    <div class="form-container" *ngIf="waningtype.dropdown.value == 'DiscreteWaning'">
+        <label>Time To Effectiveness:</label>
+        <app-form-int [isRequired]="true" #param0
+            [parameter]="fileContent['Vaccines']['Antitest']['waning']['parameters'][0]"
+            [location]="'Vaccines.Antitest.waning.parameters.0'" [fileContent]="fileContent"></app-form-int>
+    </div>
+    <div class="form-container" *ngIf="waningtype.dropdown.value == 'DiscreteWaning'">
+        <label>Duration:</label>
+        <app-form-int [isRequired]="true" #param1
+            [parameter]="fileContent['Vaccines']['Antitest']['waning']['parameters'][1]"
+            [location]="'Vaccines.Antitest.waning.parameters.1'" [fileContent]="fileContent"></app-form-int>
+    </div>
+</div>
+
+<div (click) = "setProperty('Strategy')">
+    <h2>Strategy:</h2>
+    <div class="form-container">
+        <label>Type:</label>
+        <app-dropdown [list]="hero1" [isRequired]="true" #strategytype
+            [parameter]="getStrategyType(fileContent['Vaccines']['Antitest']['strategy']['type'])"
+            [location]="'Vaccines.Antitest.strategy.type'" [fileContent]="fileContent"></app-dropdown>
+    </div>
+    <div class="form-container" *ngIf="strategytype.dropdown.value == 'Daily Dose Strategy'">
+        <label>Available From:</label>
+        <app-form-int [isRequired]="true" #availableFrom
+            [parameter]="fileContent['Vaccines']['Antitest']['strategy']['available_from']"
+            [location]="'Vaccines.Antitest.strategy.available_from'" [fileContent]="fileContent"></app-form-int>
+    </div>
+    <div class="form-container" *ngIf="strategytype.dropdown.value == 'Daily Dose Strategy'">
+        <label>Dose:</label>
+        <app-form-int [isRequired]="true" #availableFrom
+            [parameter]="fileContent['Vaccines']['Antitest']['strategy']['dose']"
+            [location]="'Vaccines.Antitest.strategy.dose'" [fileContent]="fileContent"></app-form-int>
+    </div>
+</div>

@@ -1,0 +1,116 @@
+mat-sidenav-container {
+    height: 90%;
+  }
+  
+  mat-sidenav {
+    width: 250px;
+    border-right: 1px solid rgba(168, 168, 168, 0.904);
+  }
+
+.example-spacer {
+  flex: 1 1 auto;
+  color: blue;
+}
+
+mat-sidenav-content {
+  padding: 10px;
+}
+
+.centered-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.parameter-input {
+  width: 200px;
+  margin: 10px;
+}
+
+mat-nav-list .selected {
+  background-color: #b3b0b0; /* you can change the background color here */
+}
+
+mat-nav-list {
+  max-height: calc(90vh - 138px);
+  overflow-y: auto;
+}
+
+mat-sidenav div[mat-icon-button][label="Database"] {
+  background-color: #007bff; 
+    color: white;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2); 
+    border-radius: 50%;
+    width: 56px; 
+    height: 56px; 
+    display: flex; 
+    justify-content: center; /* Center horizontally */
+    align-items: center;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
+
+
+.propertiesSideNav {
+  width: 300px;
+  border-left: 1px solid rgba(168, 168, 168, 0.904);  /* Border funktioniert nicht */
+}
+
+.list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+app-delete-toml {
+  margin-left: auto;
+}
+
+.list-item span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-right: 8px; /* Platz zwischen dem Text und dem Lösch-Button */
+}
+
+.mat-list-item-class {
+  padding-right: 0;
+}
+
+#content-container {
+  display: flex;
+  z-index: 1;
+}
+
+#visibility-button {
+ position: absolute;
+ align-self: center;
+ right: 0;
+ margin-right: 25px;
+ z-index: 2;
+}
+
+#tab-group {
+  width: 100%;
+}
+.floating-button {
+  border: none;
+  border-radius: 50%; /* Makes the button circular */
+  padding: 15px #b3b0b0; /* Adjust padding as needed */
+  font-size: 24px; /* Adjust font size as needed */
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow for depth */
+  transition: background-color 0.3s, transform 0.3s ease-out; /* Smooth transition effects */
+  padd
+
+  /* Hover effect */
+  &:hover {
+    transform: scale(1.1); /* Scale up the button slightly on hover */
+  }
+
+  /* Active effect (when clicked) */
+  &:active {
+    transform: scale(0.9); /* Scale down the button slightly when clicked */
+  }
+}

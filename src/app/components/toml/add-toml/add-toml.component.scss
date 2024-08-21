@@ -1,0 +1,44 @@
+
+.floating-button-container {
+    position: fixed;
+    bottom: 16px;
+    left: 16px;
+    z-index: 1000; /* Je nach Bedarf anpassen, um sicherzustellen, dass der Button über anderen Elementen schwebt */
+  }
+  
+  .floating-button {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    border: none;
+    border-radius: 50%; /* Makes the button circular */
+    padding: 10px; /* Adjust padding as needed */
+    font-size: 24px; /* Adjust font size as needed */
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow for depth */
+    transition: background-color 0.3s, transform 0.3s ease-out; /* Smooth transition effects */
+  
+    /* Hover effect */
+    &:hover {
+      transform: scale(1.1); /* Scale up the button slightly on hover */
+    }
+  
+    /* Active effect (when clicked) */
+    &:active {
+      transform: scale(0.9); /* Scale down the button slightly when clicked */
+    }
+  }
+  
+  .filename-input-container {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+  }
+  
+  .filename-input {
+    width: 200px; /* Adjust width as needed */
+  }
+  
+  .save-button {
+    margin-left: 10px; /* Add margin between input and button */
+  }

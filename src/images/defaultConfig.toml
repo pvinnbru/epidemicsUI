@@ -1,0 +1,114 @@
+[Simulation]
+
+    seed = ''
+    tickunit = ''
+
+    [Simulation.StartCondition]
+    type = ""
+    fraction = ''
+    pathogen = "Pathogen"   # BE AWARE, THAT NAME MUST BE THE SAME AS IN TOML SECTION
+
+    [Simulation.StopCriterion]
+    type = ""
+    limit = ''
+
+[Pathogens]
+
+    [Pathogens.Pathogen]
+        [Pathogens.Pathogen.infection_rate]
+            parameters = [] 
+            distribution = ""
+            
+        [Pathogens.Pathogen.time_to_recovery]
+            distribution = ""
+            parameters = []
+
+        [Pathogens.Pathogen.mild_death_rate]
+            distribution = ""
+            parameters = []
+
+        [Pathogens.Pathogen.critical_death_rate]
+            distribution = ""
+            parameters = []
+
+        [Pathogens.Pathogen.dpr]
+        # Matrix with Disease Progression
+            age_groups = []
+            disease_compartments = []
+            stratification_matrix = []
+            
+[Vaccines]
+
+    [Vaccines.Antitest]
+        [Vaccines.Antitest.waning]
+            parameters = []
+            waning = ""
+
+    [Vaccines.Antitest.strategy]
+            type=""
+            available_from= ''
+            dose=0
+
+[Settings]
+
+    [Settings.Household]
+        contactparameter = '' # Average number of contacts inside an household each step
+
+
+[Interventions]
+    [Interventions.Strategies.cancel_isolation]
+        type = "IStrategy"
+        [Interventions.Strategies.cancel_isolation.Measures]
+            [Interventions.Strategies.cancel_isolation.Measures.Measure1]
+                measuretype = "CancelSelfIsolation"
+                [Interventions.Strategies.cancel_isolation.Measures.Measure1.Delay]
+                    distribution = "Poisson"
+                    parameters = [0]
+                [Interventions.Strategies.cancel_isolation.Measures.Measure1.Parameters]
+
+    [Interventions.Strategies.contact_isolation]
+        type = "IStrategy"
+        [Interventions.Strategies.contact_isolation.Measures]
+            [Interventions.Strategies.contact_isolation.Measures.Measure1]
+                measuretype = "SelfIsolation"
+                [Interventions.Strategies.contact_isolation.Measures.Measure1.Delay]
+                    distribution = "Poisson"
+                    parameters = [0]
+                [Interventions.Strategies.contact_isolation.Measures.Measure1.Parameters]
+                    duration = 8
+    [Interventions.Strategies.hh_isolation]
+        type = "IStrategy"
+        [Interventions.Strategies.hh_isolation.Measures]
+            [Interventions.Strategies.hh_isolation.Measures.Measure1]
+                measuretype = "FindSettingMembers"
+                [Interventions.Strategies.hh_isolation.Measures.Measure1.Delay]
+                    distribution = "Poisson"
+                    parameters = [0]
+                [Interventions.Strategies.hh_isolation.Measures.Measure1.Parameters]
+                    follow_up = "contact_isolation"
+                    settingtype = "Household"
+    [Interventions.Strategies.symptoms_isolation_and_test]
+        type = "IStrategy"
+        [Interventions.Strategies.symptoms_isolation_and_test.Measures]
+            [Interventions.Strategies.symptoms_isolation_and_test.Measures.Measure1]
+                measuretype = "SelfIsolation"
+                [Interventions.Strategies.symptoms_isolation_and_test.Measures.Measure1.Delay]
+                    distribution = "Poisson"
+                    parameters = [0]
+                [Interventions.Strategies.symptoms_isolation_and_test.Measures.Measure1.Parameters]
+                    duration = 10
+            [Interventions.Strategies.symptoms_isolation_and_test.Measures.Measure2]
+                measuretype = "Test"
+                [Interventions.Strategies.symptoms_isolation_and_test.Measures.Measure2.Delay]
+                    distribution = "Poisson"
+                    parameters = [2]
+                [Interventions.Strategies.symptoms_isolation_and_test.Measures.Measure2.Parameters]
+                    name = "PCR-Test"
+                    type = "pcr_test"
+                    positive_followup = "nothing"
+                    negative_followup = "cancel_isolation"
+    [Interventions.Trigger]
+        [Interventions.Trigger.SymptomsTrigger]
+            strategies = ["symptoms_isolation_and_test"]
+        [Interventions.Trigger.TickTrigger]
+            strategies = []

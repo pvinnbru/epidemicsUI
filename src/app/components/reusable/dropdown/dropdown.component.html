@@ -1,0 +1,21 @@
+<form class="example-form">
+<mat-form-field class="example-full-width" >
+    <mat-label>{{list.Label}}</mat-label>
+    <mat-select [formControl]="dropdown" [required]="isRequired" 
+    [(ngModel)] = "parameter" 
+    placeholder="{{parameter}}"
+    (ngModelChange)="changeVal()">
+        <mat-option *ngFor="let option of options" [value]="option">
+            {{option}}
+          </mat-option>
+    </mat-select>
+</mat-form-field>
+<!-- 
+<ng-container *ngIf="selected.hasError('required')">
+    <mat-error>You must make a selection</mat-error>
+</ng-container>
+<ng-container *ngIf="selected.hasError('pattern') && !selected.hasError('required')">
+    <mat-error>Your selection is invalid</mat-error>
+</ng-container>
+-->
+</form>

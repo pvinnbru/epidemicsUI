@@ -1,0 +1,30 @@
+<br>
+<div class="slider">
+  <div class="slider-label">0</div>
+  <div *ngFor="let index of [0,1,2,3]" class="slider-mark" [ngStyle]="{'background-color' : colorListInSlider[index]}"></div>
+  <div *ngFor="let index of handleIndices" class="slider-handle" (mousedown)="mousedown($event, index)"
+    [ngStyle]="{'background-color' : colorList[index]}"></div>
+  <div class="slider-label">1</div>
+</div>
+
+<!-- 
+
+  The absolte values are not that relevant
+
+<br>
+<mat-form-field *ngFor="let index of handleIndices" style="margin-left: 10px" class="example-full-width no-border">
+  <input matInput [(ngModel)]="selectedIndex[index]" (blur)="handleInputChange($event, index, 'slider')" />
+  <div class="underline" [style.backgroundColor]="colorList[index]"></div>
+</mat-form-field>
+-->
+
+<br>
+<mat-form-field *ngFor="let index of [0,1,2,3]" style="margin-left: 10px" class="example-full-width no-border">
+  <mat-label>{{fieldName[index]}}</mat-label>
+  <input matInput [(ngModel)]="rangeValues[index]" (blur)="handleInputChange($event, index, 'concreteValues')" />
+  <div class="underline" [style.backgroundColor]="colorListInSlider[index]"></div>
+</mat-form-field>
+
+
+<br>
+<br>

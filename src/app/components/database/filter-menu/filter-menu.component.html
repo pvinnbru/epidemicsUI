@@ -1,0 +1,11 @@
+<div class="filter-menu">
+    <select [(ngModel)]="selectedFilterType" (change)="onFilterTypeChange(selectedFilterType)">
+        <option value="" disabled selected>Choose a filter option.</option>
+      <option *ngFor="let type of filterTypes" [value]="type">{{ type }}</option>
+    </select>
+  
+    <input type="text" [(ngModel)]="inputValue" *ngIf="selectedFilterType" (input)="onInputValueChange()"> 
+
+  </div>
+ 
+  

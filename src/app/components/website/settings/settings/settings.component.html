@@ -1,0 +1,25 @@
+<div class="subtitle" style="padding: 15px">
+    <h2>General Parameters</h2>
+    <div class="subtitle" *ngIf="fileContent['Settings']['Household'] !== undefined" (click) = "setProperty('HouseholdContactparameter')">
+      <h3 style="font-weight: bolder;">Household</h3>
+      <div class="form-container">
+        <label>Contactparameter:</label>
+        <app-form-percent [isRequired]="true" #contactparameter [parameter]="fileContent['Settings']['Household']['contactparameter']" [location]="'Settings.Household.contactparameter'" [fileContent]="fileContent"></app-form-percent>  
+      </div>
+      <button *ngIf="fileContent['Settings']['Workplace'] !== undefined" mat-raised-button color="primary" (click)="fileContent['Settings']['Household'] = undefined"><mat-icon>remove</mat-icon>Delete Household</button>
+    </div>
+    <div *ngIf="fileContent['Settings']['Workplace'] == undefined">
+      <button mat-raised-button color="primary" (click)="addWorkplace()"><mat-icon>add</mat-icon>Add Workplace</button>
+    </div>
+    <div class="subtitle" *ngIf="fileContent['Settings']['Workplace'] !== undefined" (click) = "setProperty('WorkplaceContactparameter')">
+      <h3 style="font-weight: bolder;">Workplace</h3>
+      <div class="form-container">
+        <label>Contactparameter:</label>
+        <app-form-percent [isRequired]="true" #contactparameter [parameter]="fileContent['Settings']['Workplace']['contactparameter']" [location]="'Settings.Workplace.contactparameter'" [fileContent]="fileContent"></app-form-percent>  
+      </div>
+      <button *ngIf="fileContent['Settings']['Household'] !== undefined" mat-raised-button color="primary" (click)="fileContent['Settings']['Workplace'] = undefined"><mat-icon>remove</mat-icon>Delete Workplace</button>
+    </div>
+    <div *ngIf="fileContent['Settings']['Household'] == undefined" >
+      <button mat-raised-button color="primary" (click)="addHousehold()"><mat-icon>add</mat-icon>Add Household</button>
+    </div>
+</div>

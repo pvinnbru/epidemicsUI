@@ -1,0 +1,132 @@
+<router-outlet></router-outlet>
+<mat-toolbar color="primary" style="height:10vh">
+
+  <button mat-icon-button (click)="leftSidenav.toggle()" class="example-icon" aria-label="Example icon-button with menu icon" > <!--(click)="leftSidenav.toggle()"-->
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <span>GUI for the German Epidemic Modeling System</span>
+
+  <span class="example-spacer"></span>
+
+  <!-- download button shown once file is selected -->
+  <button *ngIf="selectedTOML" mat-raised-button color="primary" aria-label="Settings" (click)="downloadFile()" style="margin-right: 10px">Download Config 
+    <mat-icon>get_app</mat-icon>
+  </button>
+
+  <!-- upload button shown once file is selected -->
+  <button *ngIf="selectedTOML" mat-raised-button color="primary" aria-label="Settings" (click)="openUploadDialog()">
+    Upload to Template-Database
+    <mat-icon>cloud_upload</mat-icon>
+  </button>
+
+</mat-toolbar>
+
+<mat-sidenav-container>
+  <!-- Sidebar -->
+  <mat-sidenav #leftSidenav mode="side" opened>
+    <h2>File-Workspace</h2>
+
+    <mat-nav-list>    
+      <mat-list-item class="mat-list-item-class" *ngFor="let file of getFilesFromDatabase()" (click)="showFileContentDatabase(file)" [class.selected]="file._id === selectedFileID">
+        <div class="list-item">
+          <span (click)="removeTabIndicator()"> {{ file.name }} </span>
+          <app-delete-toml [file] = "file"> </app-delete-toml>
+        </div>
+      </mat-list-item>       
+    </mat-nav-list>
+
+    <!-- The 3 Buttons implemented at the bottom of the sidenav -->
+    <app-login-button></app-login-button>
+    <app-add-toml></app-add-toml>
+    <app-current-user-window></app-current-user-window>
+    <app-upload-from-pc></app-upload-from-pc>
+
+  </mat-sidenav>
+
+  <!-- Content-Editor of the selected toml -->
+  <mat-sidenav-content *ngIf="selectedTOML" id="content-container">
+      <!-- Mat-tab-groups to be added here -->
+
+      <mat-tab-group *ngIf="fileContent" id="tab-group" (selectedTabChange)="onTabChange($event)">
+
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <div (click)="setActiveTab('Simulation')" style="position: relative; display: flex; align-items: start; height: 40px">
+              <img [src]="activeTab === 'Simulation' ? 'images/arrow_full.png' : 'images/arrow_empty.png'" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+              <img [src]="checkSimulation === true ? 'images/check.png' : 'images/warning.png'" style="width:25px; height:25px; position: absolute; top: 7px; left: 32px;">
+              <div [style.color]="activeTab === 'Simulation' ? 'white' : 'black'" style="position: absolute; top: 13px; left: 65px;">Simulation</div>
+            </div>
+          </ng-template>
+          <app-simulation [fileContent]="fileContent"></app-simulation>
+        </mat-tab>
+
+        <mat-tab>
+          <ng-template mat-tab-label label = "Pathogens">
+            <div (click)="setActiveTab('Pathogens')" style="position: relative; display: flex; align-items: start; height: 40px">
+              <img [src]="activeTab === 'Pathogens' ? 'images/arrow_full.png' : 'images/arrow_empty.png'" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+              <img [src]="checkPathogens === true ? 'images/check.png' : 'images/warning.png'" style="width:25px; height:25px; position: absolute; top: 7px; left: 32px;">
+              <div [style.color]="activeTab === 'Pathogens' ? 'white' : 'black'" style="position: absolute; top: 13px; left: 65px;">Pathogens</div>
+            </div>
+          </ng-template>
+          <app-pathogenes  *ngIf="this.reloadPathogene" [fileContent]="fileContent"></app-pathogenes>
+        </mat-tab>
+
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <div (click)="setActiveTab('Settings')" style="position: relative; display: flex; align-items: start; height: 40px">
+              <img [src]="activeTab === 'Settings' ? 'images/arrow_full.png' : 'images/arrow_empty.png'" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+              <img [src]="checkSettings === true ? 'images/check.png' : 'images/warning.png'" style="width:25px; height:25px; position: absolute; top: 7px; left: 32px;">
+              <div [style.color]="activeTab === 'Settings' ? 'white' : 'black'" style="position: absolute; top: 13px; left: 65px;">Settings</div>
+            </div>
+          </ng-template>
+          <app-settings [fileContent]="fileContent"></app-settings>
+        </mat-tab>
+
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <div (click)="setActiveTab('Vaccines')" style="position: relative; display: flex; align-items: start; height: 40px">
+              <img [src]="activeTab === 'Vaccines' ? 'images/arrow_full.png' : 'images/arrow_empty.png'" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+              <img [src]="checkVaccines === true ? 'images/check.png' : 'images/warning.png'" style="width:25px; height:25px; position: absolute; top: 7px; left: 32px;">
+              <div [style.color]="activeTab === 'Vaccines' ? 'white' : 'black'" style="position: absolute; top: 13px; left: 65px;">Vaccines</div>
+            </div>
+          </ng-template>
+          <app-vaccines [fileContent]="fileContent"></app-vaccines>
+        </mat-tab>
+
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <div (click)="setActiveTab('Interventions')" style="position: relative; display: flex; align-items: start; height: 40px">
+              <img [src]="activeTab === 'Interventions' ? 'images/arrow_full.png' : 'images/arrow_empty.png'" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+              <img [src]="checkInterventions === true ? 'images/check.png' : 'images/warning.png'" style="width:25px; height:25px; position: absolute; top: 7px; left: 32px;">
+              <div [style.color]="activeTab === 'Interventions' ? 'white' : 'black'" style="position: absolute; top: 13px; left: 65px;">Interventions</div>
+            </div>
+          </ng-template>
+          <app-interventions [fileContent]="fileContent"></app-interventions>
+        </mat-tab>
+
+      </mat-tab-group>
+      
+
+    <!-- Button to open the properties window -->
+      <button mat-icon-button *ngIf="!propertiesSideNav.opened" (click)="propertiesSideNav.toggle()" id="visibility-button">
+        <mat-icon>chevron_left</mat-icon>
+      </button>
+    </mat-sidenav-content>
+
+    <!-- Property Window -->
+  <mat-sidenav opened="true" id="propertiesSideNav" #propertiesSideNav class="propertiesSideNav" position="end" mode="side" style="display: flex; flex-direction: column; align-items: flex-start;">
+    <div style="height: 0px; width: 100%; text-align: right;">
+      <button mat-icon-button (click)="propertiesSideNav.toggle()" style="opacity: 0.5;">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    <app-properties-panel></app-properties-panel>
+  </mat-sidenav>
+
+  <!-- Content shown if no file is selected -->
+  <div class="centered-content" *ngIf="!selectedTOML">
+    Bitte wähle eine TOML-Datei aus der Sidebar aus.
+  </div>
+
+</mat-sidenav-container>

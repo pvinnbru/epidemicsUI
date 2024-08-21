@@ -1,0 +1,13 @@
+<h2>General Parameters</h2>
+<div class="form-container" (click)="setProperty('Seed')">
+  <label>Seed:</label>
+  <app-form-int [isRequired]="false" #seed [parameter]="fileContent['Simulation']['seed']"
+    [location]="'Simulation.seed'" [fileContent]="fileContent"></app-form-int>
+</div>
+<div class="form-container" (click)="setProperty('Unit')">
+  <label>Unit:</label>
+  <app-dropdown [list]="unit" [isRequired]="true" #tickunit
+    [parameter]="getTickunit(fileContent['Simulation']['tickunit'])" [location]="'Simulation.tickunit'"
+    [fileContent]="fileContent"></app-dropdown>
+</div>
+

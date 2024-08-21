@@ -1,0 +1,68 @@
+.slider {
+  position: relative; 
+  display:inline-block;
+  height: 5px;
+  box-sizing: border-box;
+  vertical-align: top;
+  width: 90%;
+  user-select: none;
+  margin-left: 2%;
+}
+
+.slider-mark {
+  position: absolute; 
+  display:inline-block;
+  height: 5px;
+  box-sizing: border-box;
+  vertical-align: top;
+  background: #ccc;
+  width: 15;
+  user-select: none;
+  transform: translate(-100%, -50%);
+}
+
+.slider-label {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    text-align: center;
+    color: #000;
+    user-select: none;
+  }
+
+  .slider-label:first-child {
+    left: -30px;
+  }
+  
+  .slider-label:last-child {
+    right: -30px;
+  }
+  
+  .slider-handle {
+    position: absolute;
+    height: 15px;
+    width: 15px;
+    background: #fff;
+    cursor: pointer;
+    border-radius: 50%;
+    user-select: none;
+    transform: translate(-50%, -50%);
+}
+
+
+
+
+
+.underline {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px; /* Adjust the height as needed */
+    width: 100%;
+  }
+
+  .mat-form-field-ripple {
+    /*change color of underline when focused*/
+    background-color: white !important;;
+   }

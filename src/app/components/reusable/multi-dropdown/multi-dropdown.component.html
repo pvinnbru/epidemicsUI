@@ -1,0 +1,11 @@
+<form class="example-form">
+    <mat-form-field class="example-full-width">
+        <mat-label>{{list.Label}}</mat-label>
+        <mat-select [formControl]="dropdown" [required]="isRequired" [(ngModel)]="parameter" placeholder="{{parameter}}"
+            (ngModelChange)="changeVal()" multiple>
+            <mat-option *ngFor="let option of options" [value]="option">
+                {{option}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+</form>

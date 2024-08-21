@@ -1,0 +1,41 @@
+.current-user-container {
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  width: 227px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-top: auto;
+  background-color: #fff;
+}
+
+.logout-button-container {
+  position: relative;
+  margin-bottom: 70px;
+  margin-left: 0px;
+}
+
+.current-user-email-container {
+  position: relative;
+  margin-left: 10px;
+  margin-bottom: 65px;
+}
+
+.logout-button-container button {
+  position: relative;
+  margin-left: 50px;
+  padding: 4px 6px;
+  background-color: #3498db;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.logout-button-container button:hover {
+  background-color: #2980b9;
+}

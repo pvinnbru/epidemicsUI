@@ -1,0 +1,120 @@
+<div class="form-container" style="display: flex; margin-top: 10px; flex-direction: row;">
+    <div style="display: flex; flex-direction: column; padding: 10px">
+        <label>Interventions triggered by Previous-Strategy:</label>
+        <label>Interventions triggered by Simulation-Tick:</label>
+    </div>
+    <div style="display: flex; margin-left: 60px; flex-direction: column;">
+        <app-dropdown [isRequired]=false [list]="hero4" [fileContent]="fileContent" [parameter]="fileContent['Interventions']['Trigger']['SymptomsTrigger']['strategies'][0]"></app-dropdown>
+        <app-dropdown [isRequired]=false [list]="hero4" [fileContent]="fileContent" [parameter]="fileContent['Interventions']['Trigger']['TickTrigger']['strategies'][0]"></app-dropdown>
+    </div>
+</div>
+
+<div class="interventions" style="display: flex; flex-direction: column; align-items: center;">
+    <div *ngFor="let i of generateNumbers(getStrategies().length)" style="margin: 5px;">
+        <div class="interventions" style="padding-top: 20px; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; border: 3px solid cadetblue; width: fit-content;">
+            <div class="form-container" style="display: flex; flex-direction: row;">
+                <div style="display: flex; flex-direction: column; padding: 10px">
+                    <label>Strategy:</label>
+                    <label style="padding-top: 10px">Type:</label>
+                </div>
+                <div style="display: flex; margin-left: 60px; flex-direction: column;">
+                    <app-dropdown [list]="hero1" [fileContent]="fileContent"
+                        [parameter]="getStrategyType(fileContent['Interventions']['Strategies'][getStrategies()[i]]['type'])"
+                        [fileContent]="fileContent"
+                        [location]="'Interventions.Strategies.'+getStrategies()[i]+'.type'"></app-dropdown>
+                    <app-form-text [fileContent]="fileContent" [location]="'Interventions.Strategies.'+getStrategies()[i]"
+                        [parameter]="getStrategies()[i]"></app-form-text>
+                </div>
+            </div>
+            <div *ngFor="let j of generateNumbers(getMeasures(i).length)" class="measures">
+                <div class="form-container" style="display: flex; flex-direction: row;">
+                    <div style="display: flex; flex-direction: column; padding: 10px">
+                        <label style="margin-bottom:70px; margin-top: 30px">Measure-Type:</label>
+                        <label style="margin-bottom:90px">Delay:</label>
+                        <label *ngIf="measuretype.dropdown.value == 'Self-Isolation'">Duration:</label>
+                        <label *ngIf="measuretype.dropdown.value == 'Find Setting Members'">Setting-Type:</label>
+                        <label *ngIf="measuretype.dropdown.value == 'Find Setting Members'">Following-Strategy:</label>
+                        <label *ngIf="measuretype.dropdown.value == 'Test'">Name:</label>
+                        <label *ngIf="measuretype.dropdown.value == 'Test'">Test-Type:</label>
+                        <label *ngIf="measuretype.dropdown.value == 'Test'">Positive:</label>
+                        <label *ngIf="measuretype.dropdown.value == 'Test'">Negative:</label>
+                        <label *ngIf="measuretype.dropdown.value == 'Contact Identification'">Success-Rate:</label>
+                        <label *ngIf="measuretype.dropdown.value == 'Contact Identification'">Following-Strategy:</label>
+                        <label *ngIf="measuretype.dropdown.value == 'Contact Identification'">If Condition:</label>
+                        <label *ngIf="measuretype.dropdown.value == 'Contact Identification'">Is True then:</label>
+                        <label *ngIf="measuretype.dropdown.value == 'Contact Identification'">Is False then:</label>
+                    </div>
+                    <div style="display: flex; flex-direction: column; width: 340px">
+                        <app-dropdown style="margin-top: 30px" #measuretype [list]="hero2" [fileContent]="fileContent"
+                        [parameter]="getMeasureType(fileContent['Interventions']['Strategies'][getStrategies()[i]]['Measures']['Measure'+(j+1)]['measuretype'])"
+                        [fileContent]="fileContent"
+                        [location]="'Interventions.Strategies.'+getStrategies()[i]+'.Measures.Measure'+(j+1)+'.measuretype'"></app-dropdown>
+                        
+                        <app-distribution [fileContent]="fileContent"
+                        [parameter]="fileContent['Interventions']['Strategies'][getStrategies()[i]]['Measures']['Measure'+(j+1)]['Delay']"
+                        [location]="'Interventions.Strategies.'+getStrategies()[i]+'.Measures.Measure'+(j+1)+'.Delay'"></app-distribution>
+                    
+                        <app-form-int *ngIf="measuretype.dropdown.value == 'Self-Isolation'" [fileContent]="fileContent"
+                        [parameter]="fileContent['Interventions']['Strategies'][getStrategies()[i]]['Measures']['Measure'+(j+1)]['Parameters']['duration']"
+                        [location]="'Interventions.Strategies.'+getStrategies()[i]+'.Measures.Measure'+(j+1)+'.Parameters.duration'"></app-form-int>
+
+                        <app-dropdown *ngIf="measuretype.dropdown.value == 'Find Setting Members'" [list]="hero3" [fileContent]="fileContent"
+                        [parameter]="fileContent['Interventions']['Strategies'][getStrategies()[i]]['Measures']['Measure'+(j+1)]['Parameters']['settingtype']"
+                        [location]="'Interventions.Strategies.'+getStrategies()[i]+'.Measures.Measure'+(j+1)+'.Parameters.settingtype'"></app-dropdown>
+
+                        <app-dropdown *ngIf="measuretype.dropdown.value == 'Find Setting Members'" [list]="hero4" [fileContent]="fileContent"
+                        [parameter]="fileContent['Interventions']['Strategies'][getStrategies()[i]]['Measures']['Measure'+(j+1)]['Parameters']['follow_up']"
+                        [location]="'Interventions.Strategies.'+getStrategies()[i]+'.Measures.Measure'+(j+1)+'.Parameters.follow_up'"></app-dropdown>
+                    
+                        <div *ngIf="measuretype.dropdown.value == 'Test'">
+                            <app-form-text [fileContent]="fileContent"
+                            [location]="'Interventions.Strategies.'+getStrategies()[i]+'.Measures.Measure'+(j+1)+'.Parameters.name'"
+                            [parameter]="fileContent['Interventions']['Strategies'][getStrategies()[i]]['Measures']['Measure'+(j+1)]['Parameters']['name']"></app-form-text>
+
+                            <app-dropdown [list]="hero5" [fileContent]="fileContent"
+                            [location]="'Interventions.Strategies.'+getStrategies()[i]+'.Measures.Measure'+(j+1)+'.Parameters.type'"
+                            [parameter]="getTestType(fileContent['Interventions']['Strategies'][getStrategies()[i]]['Measures']['Measure'+(j+1)]['Parameters']['type'])"></app-dropdown>
+                        
+                            <app-dropdown [list]="hero6" [fileContent]="fileContent"
+                            [location]="'Interventions.Strategies.'+getStrategies()[i]+'.Measures.Measure'+(j+1)+'.Parameters.positive_followup'"
+                            [parameter]="fileContent['Interventions']['Strategies'][getStrategies()[i]]['Measures']['Measure'+(j+1)]['Parameters']['positive_followup']"></app-dropdown>
+                        
+                            <app-dropdown [list]="hero6" [fileContent]="fileContent"
+                            [location]="'Interventions.Strategies.'+getStrategies()[i]+'.Measures.Measure'+(j+1)+'.Parameters.negative_followup'"
+                            [parameter]="fileContent['Interventions']['Strategies'][getStrategies()[i]]['Measures']['Measure'+(j+1)]['Parameters']['negative_followup']"></app-dropdown>
+                        </div>
+
+                        <div *ngIf="measuretype.dropdown.value == 'Contact Identification'">
+                            <app-form-double [fileContent]="fileContent"
+                            [parameter]="fileContent['Interventions']['Strategies'][getStrategies()[i]]['Measures']['Measure'+(j+1)]['Parameters']['successrate']"
+                            [location]="'Interventions.Strategies.'+getStrategies()[i]+'.Measures.Measure'+(j+1)+'.Parameters.successrate'"></app-form-double>
+
+                            <app-dropdown [list]="hero4" [fileContent]="fileContent"
+                            [parameter]="fileContent['Interventions']['Strategies'][getStrategies()[i]]['Measures']['Measure'+(j+1)]['Parameters']['followup']"
+                            [location]="'Interventions.Strategies.'+getStrategies()[i]+'.Measures.Measure'+(j+1)+'.Parameters.followup'"></app-dropdown>
+
+                            <app-dropdown [list]="hero7" [fileContent]="fileContent"
+                            [parameter]="fileContent['Interventions']['Strategies'][getStrategies()[i]]['Measures']['Measure'+(j+1)]['Parameters']['condition']"
+                            [location]="'Interventions.Strategies.'+getStrategies()[i]+'.Measures.Measure'+(j+1)+'.Parameters.condition'"></app-dropdown>
+
+                            <app-dropdown [list]="hero6" [fileContent]="fileContent"
+                            [parameter]="fileContent['Interventions']['Strategies'][getStrategies()[i]]['Measures']['Measure'+(j+1)]['Parameters']['true_followup']"
+                            [location]="'Interventions.Strategies.'+getStrategies()[i]+'.Measures.Measure'+(j+1)+'.Parameters.true_followup'"></app-dropdown>
+
+                            <app-dropdown [list]="hero6" [fileContent]="fileContent"
+                            [parameter]="fileContent['Interventions']['Strategies'][getStrategies()[i]]['Measures']['Measure'+(j+1)]['Parameters']['false_followup']"
+                            [location]="'Interventions.Strategies.'+getStrategies()[i]+'.Measures.Measure'+(j+1)+'.Parameters.false_followup'"></app-dropdown>
+                        </div>
+                    </div>
+                    <button class="close-button" *ngIf="getMeasures(i).length > 1" (click)="deleteMeasure(i, j)"><mat-icon>clear</mat-icon></button>
+                </div>
+            </div>
+            <div style="display: flex; justify-content: center; align-items: center; width: 100%;">
+                <button style="margin:10px" mat-raised-button class="add-button" (click)="addMeasure(i)" style="background-color: cadetblue; margin:10px">
+                    <mat-icon style="margin-left: 5px">add</mat-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+    <button style="margin:5px" mat-raised-button color="primary" (click)="addStrategy()"><mat-icon style="margin-left: 5px">add</mat-icon></button>
+</div>

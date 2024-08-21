@@ -1,0 +1,27 @@
+.properties {
+    background-color: #ffffff; /* Hier die gewünschte Hintergrundfarbe */
+    height: 100%; /* Damit es die gesamte Höhe des Sidenav-Fensters einnimmt */
+  }
+
+  h2 {
+    color: #333;
+    margin-bottom: 10px;
+    font-size: 1.5em;
+  }
+
+p {
+  color: #666;
+  margin-bottom: 20px;
+  font-size: 1.2em;
+}  
+
+.property-box {
+  border: 0px solid #ccc; padding: 10px; margin-bottom: 20px;
+}
+
+.plot-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* height: 100vh; /* Optional: Set the container height to the full viewport height */
+}

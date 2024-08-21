@@ -1,0 +1,77 @@
+<div class="overlay-content">
+    
+    <h2 id="title">Toml-Database</h2>
+
+    
+    
+    <div class="filter-container">
+        <!-- button for filter options-->
+        <button mat-raised-button id="filter_button" (click)="openFilterMenu()">
+            <mat-icon>filter_list</mat-icon>Filter
+        </button>
+
+      
+
+        <!-- show after click on filter button-->
+        <div [hidden]="!showFilterMenu">
+
+          <!-- Main button to open the filter menu -->
+          <button mat-button [matMenuTriggerFor]="Menu">
+            Add Filters
+          </button>
+          
+          <mat-menu #Menu="matMenu">
+            <app-menu-item 
+              *ngFor="let attribute of itemAttributes" 
+              [item]="attribute"
+              (itemSelected)="onSelectFilterOption($event)">
+
+            </app-menu-item>
+          </mat-menu>
+      
+          <div *ngFor="let filterOption of selectedFilterOptions" class="filter-menus-container">
+            
+            <input type="text" [value]="getLastPartOfKey(filterOption.key)" readonly>
+            <br>
+            <app-filter-menu [filterOption]="filterOption" (filterCriteriaSelected)="onSelectFilterCriteria($event)"></app-filter-menu>
+            <button mat-button (click)="removeFilterOption(filterOption)">Remove</button>
+        </div>
+
+          <button mat-button (click)="applyFilters()">Apply Filters</button>
+      </div>
+
+      <span class="toggle-container">
+          <mat-label>Show all files</mat-label>
+          <mat-slide-toggle formControlName="autoLayout" (change)="onToggleChange($event)"></mat-slide-toggle>
+          <span>My files</span>
+        </span>
+
+      <table mat-table class="mat-elevation-z8">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Filename</th>
+                <th>Author</th>
+                <th>Date</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of items" (click)="openInEditor(item)">
+              <button mat-icon-button (click)="openItemAsJson(item)" class="openAsJsonButton">
+                <mat-icon>launch</mat-icon>
+            </button>
+                <td>{{ item.name ? item.name : 'unavailable'}}</td>
+                <td>{{ item.author ? item.author : 'guest'}}</td>
+                <td>{{ item.date ? item.date : 'not known'}}</td>
+                <td>
+                    <span class="tooltip">
+                        <mat-icon>info</mat-icon>
+                        <span class="tooltiptext">{{ item.description }}</span>
+                    </span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+           
+    </div>

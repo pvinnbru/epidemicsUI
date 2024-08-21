@@ -1,0 +1,16 @@
+<div class="subtitle">
+    <h2>Stop Criterion</h2>
+  
+    <div class="form-container" (click)="setProperty('StopType')">
+      <label>Type</label>
+      <app-dropdown #stoptype [list]="type" [isRequired]="true" [parameter]="getStoptype(fileContent['Simulation']['StopCriterion']['type'])" 
+      [fileContent]="fileContent" [location]="'Simulation.StopCriterion.type'"></app-dropdown>
+    </div>
+  
+    <div *ngIf="stoptype.dropdown.value == 'Time is Up'" class="form-container" (click)="setProperty('Limit')">
+      <label>Limit</label>
+      <app-form-int #limit [isRequired]="true" [parameter]="fileContent['Simulation']['StopCriterion']['limit']" 
+      [fileContent]="fileContent" [location]="'Simulation.StopCriterion.limit'"></app-form-int>
+    </div>
+  
+  </div>

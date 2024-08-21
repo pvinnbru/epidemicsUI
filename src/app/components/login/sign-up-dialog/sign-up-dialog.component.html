@@ -1,0 +1,27 @@
+<h2 mat-dialog-title>Sign Up</h2>
+
+<div mat-dialog-content class="custom-input-container">
+  <mat-form-field class = "input-field" appearance="fill">
+    <mat-label>Email</mat-label>
+    <input matInput type="email" placeholder="Enter your email" [(ngModel)]="email">
+  </mat-form-field>
+</div>
+<div mat-dialog-content class="custom-input-container">
+  <mat-form-field class = "input-field" appearance="fill" >
+    <mat-label>Password</mat-label>
+    <input matInput type="password" placeholder="Enter your password" [(ngModel)]="password">
+  </mat-form-field>
+</div>
+<div mat-dialog-content class="custom-input-container">
+  <mat-form-field class = "input-field" appearance="fill">
+    <mat-label>Confirm Password</mat-label>
+    <input matInput type="password" placeholder="Confirm your password" [(ngModel)]="confirmPassword">
+  </mat-form-field>
+</div>
+<div class="error-message" *ngIf="passwordMismatch || userExists">
+  {{ passwordMismatch ? 'Passwords do not match.' : 'User with the same email already exists.' }}
+</div>
+<div mat-dialog-actions class="dialog-buttons">
+  <button mat-button color="warn" (click)="onNoClick()">Cancel</button>
+  <button mat-button color="primary" cdkFocusInitial (click)="onSignUpClick()">Sign Up</button>
+</div>

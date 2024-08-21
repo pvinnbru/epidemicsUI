@@ -1,0 +1,7 @@
+<div class="example-container">
+  <mat-form-field>
+    <mat-label>Enter an integer</mat-label>
+    <input [readonly]="isReadonly" matInput [(ngModel)]="parameter" placeholder="{{ parameter }}" [formControl]="numberInRange" [required]="isRequired" (change)="changeVal($event)">
+    <mat-error *ngIf="numberInRange.invalid">{{ getErrorMessage(numberInRange) }}</mat-error>
+  </mat-form-field>
+</div>

@@ -1,0 +1,8 @@
+<div class="example-container">
+    <mat-form-field>
+      <mat-label *ngIf="!isReadonly">Enter text</mat-label>
+      <input matInput [readonly]="isReadonly" [(ngModel)]="parameter" placeholder="{{ parameter }}" [required]="isRequired" [formControl]="numberInRange" (change)="changeVal($event)" (blur)="onBlur()">
+      <mat-error *ngIf="numberInRange.invalid">{{ numberRangeValidator(numberInRange) }}</mat-error>
+    </mat-form-field>
+  </div>
+  

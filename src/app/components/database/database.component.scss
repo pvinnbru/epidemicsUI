@@ -1,0 +1,106 @@
+
+:host {
+    display: block; 
+    background-color: white; 
+    padding: 5%; 
+    border-radius: 4px; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    align-items: flex-start; 
+    
+}
+
+.overlay-content {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box; /* Include padding and border in the element's width */
+    text-align: left;
+    vertical-align: center;
+    position: relative;
+    overflow: auto;
+}
+
+.filter-container {
+  justify-content: space-between; /* This will put space between the button and the toggle */
+}
+
+.item-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    overflow: visible;
+}
+
+.item-container:hover {
+  cursor: default;
+}
+
+.openAsJsonButton {
+    margin-right: auto;
+}
+
+#title {
+    white-space: nowrap;
+    white-space-collapse: collapse;
+    text-wrap: nowrap;
+    
+}
+
+#filter_button, .toggle-container {
+  margin: 5px;
+}
+
+.tooltip {
+  display: inline-block;
+  margin-left: auto;
+  position: relative;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  background-color: #fff;
+  color: black;
+  text-align: left;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  font-size: 0.75em;
+  border: 1px solid black;
+  line-height: 1;
+  width: 14em;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+.filter-menus-container {
+  display: flex;
+  flex-wrap: wrap; /* Optional, allows wrapping if there are too many filters */
+  align-items: center; /* Optional, for vertical alignment */
+  gap: 10px; /* Optional, for some space between filter menus */
+  padding-bottom: 1em;
+}
+
+.toggle-container {
+  display: flex;
+  align-items: center;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+tr:hover {
+  background-color: #e8e8e8;
+}

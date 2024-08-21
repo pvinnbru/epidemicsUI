@@ -1,0 +1,254 @@
+
+<div class="properties" style="padding: 2px">
+ 
+
+  <!-- 
+    The structure of this html is very simple:
+
+    It checks requirements for the content of the property window and then displays the content
+   --> 
+  
+
+  <!-- PROPERTIES OF SIMULATION PARAMETERS -->
+
+    <!-- TODO: SIMULATION, PATHOGEN ETC Einführungstab-->
+    <div *ngIf="(getProperty() | async) === ''">
+      <div class = "property-box">
+        <h2> Property Window </h2>
+          <p> Click on the different input sections to obtain information in this window. </p>
+      </div>
+    </div>
+
+    <div *ngIf="(getProperty() | async) === 'Simulation'">
+      <div class = "property-box">
+        <h2>Simulation</h2>
+          <p> Define initial simulation settings and the termination criteria.  </p>
+      </div>
+    </div>
+
+    <div *ngIf="(getProperty() | async) === 'Pathogens'">
+      <div class = "property-box">
+        <h2>Pathogens</h2>
+          <p> The user provides a description of the pathogen properties here. </p>
+      </div>
+    </div>
+
+    <div *ngIf="(getProperty() | async) === 'Settings'">
+      <div class = "property-box">
+        <h2>Settings</h2>
+          <p> Here the user can configure parameters indicating the average number of contacts per tick in different settings. </p>
+      </div>
+    </div>
+
+    <div *ngIf="(getProperty() | async) === 'Vaccines'">
+      <div class = "property-box">
+        <h2>Vaccines</h2>
+          <p> Configure the effectiveness and distribution strategy of vaccinations. </p>
+      </div>
+    </div>
+
+    <div *ngIf="(getProperty() | async) === 'Interventions'">
+      <div class = "property-box">
+        <h2>Interventions</h2>
+          <p> Configure how intervention strategies shall be executed in the simulation.  </p>
+          
+          <br>
+          <!-- @Niklas und @Tobi -->
+          <!-- Gerne hier einfach eintippen, was die Felder bedeuten, ich kann das dann noch im Fenster durch "Anklicken" dynamisch sichtbar machen -->
+          <p></p>
+      </div>
+    </div>
+
+    <!-- GENERAL PARAMETERS -->
+
+    <div *ngIf="(getProperty() | async) === 'Seed'">
+      <div class = "property-box">
+        <h2>Seed</h2>
+          <p> The seed is an initial value that determines the starting point to generate random data in the simulation. 
+            Providing an integer here ensures reproducibility, as the same seed will yield the same simulation results each time. </p>
+      </div>
+    </div>
+
+    <div *ngIf="(getProperty() | async) === 'Unit'">
+      <div class = "property-box">
+        <h2>Unit</h2>
+          <p> A Unit refers to the scale used to quantify time intervals in the simulation. It could be seconds, minutes, hours, days or weeks. </p>
+      </div>
+    </div>
+
+    <!-- START CONDITION -->
+    
+    <div *ngIf="(getProperty() | async) === 'StartType'">
+      <div class = "property-box">
+        <h2>Type (Start Condition)</h2>
+          <p> Specifies the conditions under which the simulation will start. 
+            The "Standard" option includes a patient zero, which starts the simulation of the disease outbreak with a single infected individual. 
+            With "infected fraction", a certain percentage of the population is infected at the start of the simulation </p>
+      </div>
+    </div>
+
+    <div *ngIf="(getProperty() | async) === 'Pathogen'">
+      <div class = "property-box">
+        <h2>Pathogen</h2>
+          <p> Specifies the name of the pathogen with which the population has to be infected. </p>
+      </div>
+    </div>
+
+    <div *ngIf="(getProperty() | async) === 'Fraction'">
+      <div class = "property-box">
+        <h2>Fraction </h2>
+          <p> If the start criterion is based on a infected fraction, users can input the value for the corresponding percentage here. </p>
+      </div>
+    </div>
+
+      <!-- STOP CONDITION -->
+
+    <div *ngIf="(getProperty() | async) === 'StopType'">
+      <div class = "property-box">
+      <h2>Type (Stop-Criterion)</h2>
+          <p> Determines the criteria for stopping the simulation. Users can choose the stopping condition, such as when a specific time is reached. </p>
+      </div>
+    </div>
+
+    <div *ngIf="(getProperty() | async) === 'Limit'">
+      <div class = "property-box">
+        <h2>Limit </h2>
+        <p> If the stop criterion is based on a limit, users can input the value for that limit here. </p>
+      </div>
+    </div>
+
+    <!-- PROPERTIES OF PATHOGENS PARAMETERS -->
+
+    <div *ngIf="(getProperty() | async) === 'Infection Rate'">
+      <div class = "property-box">
+        <h2>InfectionRate</h2>
+          <p> The Infection Rate represents the likelihood or probability of an individual getting infected within a specific time frame. 
+            It is often associated with the transmission dynamics of the pathogen in the simulated environment. 
+            Users define a probability distribution to model how likely an interaction will result in infection. </p>
+      </div>
+    </div>
+
+    <div *ngIf="(getProperty() | async) === 'Time to recovery'">
+      <div class = "property-box">
+        <h2>Time to recovery</h2>
+          <p> Time To Recovery is the duration it takes for an infected individual to recover from the illness. 
+            Users define a probability distribution to capture the variability in recovery times among the simulated population. 
+            This parameter helps model the recovery phase of the infection. </p>
+      </div>
+    </div>
+
+    <div *ngIf="(getProperty() | async) === 'Mild death rate'">
+      <div class = "property-box">
+        <h2>Mild death rate</h2>
+          <p> The Mild Death Rate signifies the probability of death for individuals who experience mild symptoms during the course of the infection.
+            Users set a probability distribution to simulate the likelihood of death among those with less severe manifestations of the illness. </p>
+      </div>
+    </div>
+
+    <div *ngIf="(getProperty() | async) === 'Critical death rate'">
+      <div class = "property-box">
+        <h2>Critical death rate</h2>
+          <p> The Critical Death Rate represents the probability of death for individuals who develop severe or critical symptoms.
+            Users define a probability distribution to model the fatality risk among those facing more severe consequences of the infection. </p>
+      </div>
+    </div>
+
+      <div *ngIf = "validDistributionProperties.includes(((getProperty() | async) || ''))" >
+
+      <div *ngIf="(getDistribution() | async) === 'Normal'" class = "property-box">
+        <h3>Normal Distribution</h3>
+        <p> Symmetrical distribution with a bell-shaped curve. It is characterized by a mean and standard deviation, representing a wide range of continuous random variables. </p>
+      </div>
+
+      <div *ngIf="(getDistribution() | async) === 'Uniform'" class = "property-box">
+        <h3>Uniform Distribution</h3>
+          <p> All values within a specified range are equally likely. It has a constant probability density function. </p>
+      </div>
+  
+      <div *ngIf="(getDistribution() | async) === 'Exponential'" class = "property-box">
+        <h3>Exponential Distribution</h3>
+          <p> Models the time between events happening continuously and independently. It's often used when events occur at a constant average rate. 
+            The distribution is skewed to the right, and it's commonly used to predict the time until the next event </p>
+      </div>
+  
+      <div *ngIf="(getDistribution() | async) === 'Poisson'" class = "property-box">
+        <h3>Poisson Distribution </h3>
+          <p> Models the number of events occurring in a fixed interval of time or space. It is often used for rare events with a known average rate.
+          </p>
+      </div>
+  
+      <div *ngIf="(getDistribution() | async) === 'Binomial'" class = "property-box">
+        <h3>Binomial Distribution</h3>
+          <p> Models the number of successes in a fixed number of independent trials, each with the same probability of success. </p>
+      </div>
+  
+      <div *ngIf="(getDistribution() | async) === 'Gamma'" class = "property-box">
+        <h3>Gamma Distribution</h3>
+          <p> Continuous probability distribution that generalizes the exponential distribution. 
+            It is often used to model the time until a Poisson process reaches a certain number of events.
+          </p>
+      </div>
+  
+      <div *ngIf="(getDistribution() | async) === 'Beta'" class = "property-box">
+        <h3>Beta Distribution</h3>
+          <p> Continuous probability distribution defined on the interval [0, 1]. It is often used to model the distribution of random variables representing proportions or probabilities. </p>
+      </div>
+  
+      <div *ngIf="(getDistribution() | async) === 'Weibull'" class = "property-box">
+        <h3>Weibull Distribution </h3>
+          <p> Continuous probability distribution often used to model the distribution of survival times. It can have different shapes, including exponential and normal distributions as special cases. </p>
+      </div>
+    </div>
+       
+    <div *ngIf="(getProperty() | async) === 'AgeGroups'">
+      <div class = "property-box">
+        <h2>Age Groups</h2>
+        <p> The user has the option of creating different age groups and assigning the probability of disease progression 
+          in the symptom categories "Asymptomatic", "Mild", "Severe" and "Critical" to these age groups. </p>
+        <p> The stratification matrix is used to assign probabilities to the different symptom categories.
+            By using the sliders, the probabilities are automatically split. The colors represent the different severity of the symptoms. </p>
+      </div>
+    </div>
+
+    <!-- PROPERTIES OF SETTINGS PARAMETERS -->
+    <div *ngIf="(getProperty() | async) === 'HouseholdContactparameter'">
+      <div class = "property-box">
+        <h2>Household</h2>
+          <p> The Contactparameter indicates the average number of contacts per tick in a Household. </p>
+      </div>
+    </div>
+
+    <div *ngIf="(getProperty() | async) === 'WorkplaceContactparameter'">
+      <div class = "property-box">
+        <h2>Workplace Contactparameter</h2>
+          <p> The Contactparameter indicates the average number of contacts per tick in a Workplace. </p>
+      </div>
+    </div>
+
+    <!-- PROPERTIES OF VACCINES PARAMETERS -->
+
+  
+    <div *ngIf="(getProperty() | async) === 'Waning'">
+      <div class = "property-box">
+        <h2>Waning</h2>
+          <p> The user can configure the waning of immunity. 
+            Discrete Waning considers the agent as completely immune for a fixed duration and completely susceptible for the rest of the time.</p>
+          <p> The time to effectiveness describes the fixed time till the vaccine takes effect. </p>
+          <p> The duration is the time for which the vaccine is effective. </p>
+      </div>
+    </div>
+
+    <div *ngIf="(getProperty() | async) === 'Strategy'">
+      <div class = "property-box">
+        <h2>Strategy</h2>
+          <p> Definition of the vaccination strategy in the simulation. 
+            Currently only a very simple Daily Dose Strategy is implemented to distribute a fixed number of doses per day.
+          </p>
+          <p> Under "Avalilable From:" you need to enter the tick unit from which the vaccine should be available. </p>
+          <p> The Dose Field defines the amount of vaccines that are distributed per time unit.</p>
+      </div>
+    </div>
+
+    <!-- PROPERTIES OF INTERVENTIONS PARAMETERS -->
+
+</div>

@@ -1,0 +1,58 @@
+
+
+<div class="form-container">
+    <div class="subtitle" (click) = "setProperty('Infection Rate')">
+        <h2>Infection Rate</h2>
+        <app-distribution [fileContent]="fileContent" 
+        [parameter]= "fileContent['Pathogens'][this.pathogen]['infection_rate']" 
+        [location]="'Pathogens.'+this.pathogen+'.infection_rate'"></app-distribution>
+    </div>
+    <app-plot-distributions *ngIf="this.reload"
+     [distribution] = "this.fileContent['Pathogens'][this.pathogen]['infection_rate']['distribution']"
+     [distributionParameter1] = "this.fileContent['Pathogens'][this.pathogen]['infection_rate']['parameters'][0]"
+     [distributionParameter2] = "this.fileContent['Pathogens'][this.pathogen]['infection_rate']['parameters'][1]" ></app-plot-distributions> 
+</div>
+
+<div class="form-container">
+    <div class="subtitle" (click) = "setProperty('Time to recovery')">
+    <h2>Time to recovery</h2>
+        <app-distribution [fileContent]="fileContent" 
+        [parameter]= "fileContent['Pathogens'][this.pathogen]['time_to_recovery']" 
+        [location]="'Pathogens.'+this.pathogen+'.time_to_recovery'"></app-distribution>
+    </div>
+    <app-plot-distributions *ngIf="this.reload"
+    [distribution] = "this.fileContent['Pathogens'][this.pathogen]['time_to_recovery']['distribution']" 
+    [distributionParameter1] = "this.fileContent['Pathogens'][this.pathogen]['time_to_recovery']['parameters'][0]" 
+    [distributionParameter2] = "this.fileContent['Pathogens'][this.pathogen]['time_to_recovery']['parameters'][1]" ></app-plot-distributions>
+</div>
+
+<div class="form-container">
+    <div class="subtitle" (click) = "setProperty('Mild death rate')">
+        <h2>Mild death rate</h2>
+        <app-distribution
+        [fileContent]="fileContent" 
+        [parameter]= "fileContent['Pathogens'][this.pathogen]['mild_death_rate']" 
+        [location]="'Pathogens.'+this.pathogen+'.mild_death_rate'"></app-distribution>
+    </div>
+    <app-plot-distributions *ngIf="this.reload"
+    [distribution] = "this.fileContent['Pathogens'][this.pathogen]['mild_death_rate']['distribution']" 
+    [distributionParameter1] = "this.fileContent['Pathogens'][this.pathogen]['mild_death_rate']['parameters'][0]" 
+    [distributionParameter2] = "this.fileContent['Pathogens'][this.pathogen]['mild_death_rate']['parameters'][1]" ></app-plot-distributions>
+</div>
+
+<div class="form-container">
+    <div class="subtitle" (click) = "setProperty('Critical death rate')">
+        <h2>Critical death rate</h2>
+        <app-distribution 
+        [fileContent]="fileContent" 
+        [parameter]= "fileContent['Pathogens'][this.pathogen]['critical_death_rate']" 
+        [location]="'Pathogens.'+this.pathogen+'.critical_death_rate'"></app-distribution>
+    </div>
+     <app-plot-distributions *ngIf="this.reload"
+      [distribution] = "this.fileContent['Pathogens'][this.pathogen]['critical_death_rate']['distribution']" 
+      [distributionParameter1] = "this.fileContent['Pathogens'][this.pathogen]['critical_death_rate']['parameters'][0]" 
+      [distributionParameter2] = "this.fileContent['Pathogens'][this.pathogen]['critical_death_rate']['parameters'][1]" ></app-plot-distributions>
+    <!-- Abfrage der Distribution von [Critical Death Rate, Mild Death Rate, Time to recovery, Infection Rate] anstelle der zuletzt angeklickten distribution-->
+      
+</div>
+

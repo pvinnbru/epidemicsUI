@@ -1,0 +1,52 @@
+.form-container {
+  display: flex;
+  align-items: center;
+}
+
+.form-container label {
+  margin-right: 20px;
+  margin-top: 10px;
+  margin-bottom: 40px;
+  font-size: medium;
+}
+
+app-dropdown,
+app-dropdown-search,
+app-form-int,
+app-form-percent,
+app-form-text,
+app-form-double,
+app-distribution {
+  position: sticky;
+  left: 20%;
+  transform: translate(-20%, 0);
+}
+
+.grid-container {
+  position: sticky;
+  display: grid;
+  grid-template-columns: repeat(40, 1fr); /* Adjust the number of columns */
+  grid-gap: 5px;
+  /*margin-left: 5%; */
+  padding: 10px; /* Add padding to create space between the grid and the border */
+  border: 10px solid #aaa3eea1; /* Add a border around the grid */
+  border-radius: 10px; /* Optional: Add border-radius for rounded corners */
+}
+  .grid-header{
+    margin-left: 52%;
+  }
+
+.slider-container {
+  margin-left: 30%;
+}
+
+.slider-container input[type="range"] {
+  width: 450%; 
+}
+.dot {
+  width: 10px;  
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid #000;
+  background-color: white;
+}

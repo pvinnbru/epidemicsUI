@@ -1,0 +1,47 @@
+<div class="subtitle">
+  <div (click)="setProperty('AgeGroups')">
+    <h2>Age Groups</h2>
+    <div class="form-container">
+      <label>Number of age groups:</label>
+      <app-form-int #fields [min]="1" [max]="100" class="centered" [isReadonly]="this.ageOkay"
+        [parameter]="fileContent['Pathogens'][this.pathogen]['dpr']['age_groups'].length" [isRequired]="true"></app-form-int>
+    </div>
+
+    <br>
+
+    <div *ngFor="let i of generateNumbers(fields.value)" #appFormText class="form-container">
+      <label>Age group: {{i}}</label>
+      <app-form-text #test class="centered" [isReadonly]="this.ageOkay"
+        [parameter]="fileContent['Pathogens'][this.pathogen]['dpr']['age_groups'][i-1]"></app-form-text>
+      {{this.addAgeGroup(i- 1, test.value)}}
+    </div>
+
+  <button mat-raised-button color="primary" (click)="editAgeGroups(ageGroups)" *ngIf="!ageOkay">Finish editing age groups</button>
+  <button mat-raised-button color="primary" (click)="setAgeOkay()" *ngIf="ageOkay">Edit age groups</button>
+    {{validationMessageAge}}
+  
+
+  <div *ngIf="ageOkay">
+    <h2>Stratification matrix</h2>
+
+    <!--
+    <div class="table" >
+      <div class="table-row">
+        <div class="table-cell">Asymptomatic</div>
+        <div class="table-cell">Mild</div>
+        <div class="table-cell">Severe</div>
+        <div class="table-cell">Critical</div>
+      </div>
+    </div>
+-->
+    <div *ngFor="let i of generateNumbers(fields.value)" #appFormText>
+
+      <div style="width: 100px;">
+        <h2>{{ageGroups[i-1]}}</h2>
+      </div>
+
+      <app-age-slider (valueChanged)="onSliderValueChanged($event, i-1)" [fileContent]="fileContent"
+        [givenIndex]="i-1"></app-age-slider>
+      <br>
+
+    </div>

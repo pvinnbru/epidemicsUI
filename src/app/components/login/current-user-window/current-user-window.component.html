@@ -1,0 +1,11 @@
+<div class="current-user-container">
+  <div class="current-user-email-container" *ngIf="loggedInUserEmail">
+  {{ loggedInUserEmail }}
+  </div>
+  <div class="logout-button-container" *ngIf="loggedInUserEmail">
+    <button (click)="logout()">Logout</button>
+  </div>
+  <div class="current-user-email-container" *ngIf="!loggedInUserEmail">
+    Guest
+  </div>
+</div>

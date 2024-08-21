@@ -1,0 +1,23 @@
+.form-container {
+  display: flex;
+  align-items: center;
+}
+
+.form-container label {
+  margin-right: 20px;
+  margin-top: 10px;
+  margin-bottom: 40px;
+  font-size: medium;
+}
+
+app-dropdown,
+app-dropdown-search,
+app-form-int,
+app-form-percent,
+app-form-text,
+app-form-double,
+app-distribution {
+  position: sticky;
+  left: 20%;
+  transform: translate(-20%, 0);
+}

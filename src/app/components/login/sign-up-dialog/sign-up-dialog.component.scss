@@ -1,0 +1,27 @@
+.mat-dialog-container {
+  max-width: 2000px;
+}
+
+.custom-input-container {
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+.custom-input {
+  margin-bottom: 15px;
+}
+
+.input-field{
+  width: 750px;
+}
+.error-message {
+  color: red;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.dialog-buttons {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}

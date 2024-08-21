@@ -1,0 +1,77 @@
+<div class="form-container">
+    <label>Distribution:</label>
+    <app-dropdown [list]="distri" class="centered" [isRequired]="true"
+    [parameter]="parameter['distribution']" #distribution [fileContent]="fileContent" [location]="this.location+'.distribution'"></app-dropdown> <!-- durch this.pathogen gibt es eine Fehlermeldung in der Konsole -->
+</div>
+
+<!-- Normal Distribution -->
+<div *ngIf="distribution.dropdown.value == 'Normal'" class="form-container" (change) = "distributionParameterChange()">
+    <label >Mean (μ)</label>
+    <app-form-double class="centered" [isRequired]="true" [parameter]="parameter['parameters']['0']" [fileContent]="fileContent" [location]="this.location + '.parameters.0'"></app-form-double>
+</div>
+<div *ngIf="distribution.dropdown.value == 'Normal'" class="form-container" (change) = distributionParameterChange()>
+    <label>Standard Deviation (σ)</label>
+    <app-form-double class="centered" [isRequired]="true" [min] = "0" [parameter]="parameter['parameters']['1']" [fileContent]="fileContent" [location]="this.location + '.parameters.1'"></app-form-double>
+</div>
+
+<!-- Uniform Distribution -->
+<div *ngIf="distribution.dropdown.value == 'Uniform'" class="form-container" (change) = distributionParameterChange()>
+    <label>Lower Bound (a)</label>
+    <app-form-double class="centered" [isRequired]="true" [parameter]="parameter['parameters']['0']" [fileContent]="fileContent" [location]="this.location + '.parameters.0'"></app-form-double>
+</div>
+<div *ngIf="distribution.dropdown.value == 'Uniform'" class="form-container" (change) = distributionParameterChange()>
+    <label>Upper Bound (b)</label>
+    <app-form-double class="centered" [isRequired]="true" [parameter]="parameter['parameters']['1']" [fileContent]="fileContent" [location]="this.location + '.parameters.1'"></app-form-double>
+</div>
+
+<!-- Exponential Distribution -->
+<div *ngIf="distribution.dropdown.value == 'Exponential'" class="form-container" (change) = distributionParameterChange()>
+    <label>Inverse of Rate (λ)</label>
+    <app-form-double class="centered" [isRequired]="true" [min] = "0" [parameter]="parameter['parameters']['0']" [fileContent]="fileContent" [location]="this.location + '.parameters.0'"></app-form-double>
+</div>
+
+<!-- Poisson Distribution -->
+<div *ngIf="distribution.dropdown.value == 'Poisson'" class="form-container">
+    <label style="width:125px; font-size: small">Intensity (λ):</label>
+    <app-form-double class="centered" [isRequired]="true" [min] = "0" [parameter]="parameter['parameters']['0']" [fileContent]="fileContent" [location]="this.location + '.parameters.0'"></app-form-double>
+</div>
+
+<!-- Binomial Distribution -->
+<div *ngIf="distribution.dropdown.value == 'Binomial'" class="form-container" (change) = distributionParameterChange()>
+    <label>Number of Trials (n)</label>
+    <app-form-int class="centered" [isRequired]="true" [parameter]="parameter['parameters']['0']" [fileContent]="fileContent" [location]="this.location + '.parameters.0'"></app-form-int>
+</div>
+<div *ngIf="distribution.dropdown.value == 'Binomial'" class="form-container" (change) = distributionParameterChange()>
+    <label>Probability of Success (p)</label>
+    <app-form-percent class="centered" [isRequired]="true" [parameter]="parameter['parameters']['1']" [fileContent]="fileContent" [location]="this.location + '.parameters.1'"></app-form-percent>
+</div>
+
+<!-- Gamma Distribution -->
+<div *ngIf="distribution.dropdown.value == 'Gamma'" class="form-container" (change) = distributionParameterChange()>
+    <label>Shape Parameter (α)</label>
+    <app-form-double class="centered" [isRequired]="true" [parameter]="parameter['parameters']['0']" [fileContent]="fileContent" [location]="this.location + '.parameters.0'"></app-form-double>
+</div>
+<div *ngIf="distribution.dropdown.value == 'Gamma'" class="form-container" (change) = distributionParameterChange()>
+    <label>Scale Parameter (β)</label>
+    <app-form-double class="centered" [isRequired]="true" [parameter]="parameter['parameters']['1']" [fileContent]="fileContent" [location]="this.location + '.parameters.1'"></app-form-double>
+</div>
+
+<!-- Beta Distribution -->
+<div *ngIf="distribution.dropdown.value == 'Beta'" class="form-container" (change) = distributionParameterChange()>
+    <label>Shape Parameter (α)</label>
+    <app-form-double class="centered" [min] = "0" [isRequired]="true" [parameter]="parameter['parameters']['0']" [fileContent]="fileContent" [location]="this.location + '.parameters.0'"></app-form-double>
+</div>
+<div *ngIf="distribution.dropdown.value == 'Beta'" class="form-container" (change) = distributionParameterChange()>
+    <label>Shape Parameter (β)</label>
+    <app-form-double class="centered"  [min] = "0" [isRequired]="true" [parameter]="parameter['parameters']['1']" [fileContent]="fileContent" [location]="this.location + '.parameters.1'"></app-form-double>
+</div>
+
+<!-- Weibull Distribution -->
+<div *ngIf="distribution.dropdown.value == 'Weibull'" class="form-container" (change) = distributionParameterChange()>
+    <label>Shape Parameter (α)</label>
+    <app-form-double class="centered"  [min] = "0" [isRequired]="true" [parameter]="parameter['parameters']['0']" [fileContent]="fileContent" [location]="this.location + '.parameters.0'"></app-form-double>
+</div>
+<div *ngIf="distribution.dropdown.value == 'Weibull'" class="form-container" (change) = distributionParameterChange()>
+    <label>Scale Parameter (θ)</label>
+    <app-form-double class="centered"  [min] = "0" [isRequired]="true" [parameter]="parameter['parameters']['1']" [fileContent]="fileContent" [location]="this.location + '.parameters.1'"></app-form-double>
+</div>

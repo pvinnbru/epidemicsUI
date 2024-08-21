@@ -1,0 +1,16 @@
+<ng-container>
+    <!-- if item doesnt have children -->
+    <button *ngIf="!item.children" mat-menu-item (click)="onSelect(item)">
+      {{ getLastPartOfKey(item.key) }}
+    </button>
+
+    <!-- if item does have children -->
+    <button *ngIf="item.children" mat-menu-item [matMenuTriggerFor]="childMenu">
+      {{ getLastPartOfKey(item.key) }}
+    </button>
+
+    <mat-menu #childMenu="matMenu">
+      <app-menu-item *ngFor="let child of item.children" [item]="child" (selectionMade)="onSelect($event)"></app-menu-item>
+    </mat-menu>
+</ng-container>
+    

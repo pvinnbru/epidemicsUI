@@ -1,0 +1,21 @@
+<h2 mat-dialog-title>Create new Configuration</h2>
+<mat-tab-group>
+  <mat-tab label = "Add Blank Toml">
+    
+    <div mat-dialog-content>
+      <p> Enter the name for the Configuration. </p>
+      <input matInput #filenameInput placeholder="filename" class="custom-input" (keyup.enter)="createNewConfiguration(filenameInput.value)">
+    </div>
+    <div mat-dialog-actions class="dialog-buttons">
+      <button mat-button color="primary" (click)="onNoClick()">Cancel</button>
+      <button mat-button color="primary" cdkFocusInitial (click)="createNewConfiguration(filenameInput.value)">Create</button>
+    </div>
+
+  </mat-tab>
+  <mat-tab label = "Add Template from Database">
+    <app-database></app-database>
+     
+  </mat-tab>
+</mat-tab-group>
+
+

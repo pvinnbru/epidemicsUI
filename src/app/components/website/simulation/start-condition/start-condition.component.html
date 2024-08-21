@@ -1,0 +1,31 @@
+<h2>Start Condition</h2>
+<div class="form-container" (click)="setProperty('StartType')">
+  <label>Type</label>
+  <app-dropdown #starttype [list]="type"
+    [parameter]="getStarttype(fileContent['Simulation']['StartCondition']['type'])" [fileContent]="fileContent"
+    [location]="'Simulation.StartCondition.type'"></app-dropdown>
+    
+</div>
+
+<div class="form-container" (click)="setProperty('Pathogen')">
+  <label>Pathogen:</label>
+  <app-form-text #pathogeneName [isRequired]="true" [fileContent]="fileContent" [location]="'Simulation.StartCondition.pathogen'"
+    [parameter]="fileContent['Simulation']['StartCondition']['pathogen']"></app-form-text>
+</div>
+
+<div *ngIf="starttype.dropdown.value == 'Infected Fraction'" class="form-container" (click)="setProperty('Fraction')">
+  <label>Fraction</label>
+  <app-form-percent [isRequired]="true"
+    [parameter]="fileContent['Simulation']['StartCondition']['fraction']" [fileContent] ="fileContent"
+    [location]="'Simulation.StartCondition.fraction'" (change)="updateSlider($event)"> </app-form-percent>
+</div>
+
+<div *ngIf="starttype.dropdown.value == 'Infected Fraction'" style="text-align: left; margin-left:5%;">
+  <h2>Visual representation of infected Population at Simulation Start</h2>
+  <input style="width:300px" type="range"  min="0" max="1" step="0.001" [(ngModel)]="sliderValue" (input)="updateGrid()" />
+
+  <div *nglf ="starttype.dropdown.value == 'InfectedFraction'"></div>
+  <div class="grid-container">
+    <div *ngFor="let dot of dots" class="dot" [style.background]="dot.filled ? 'black' : 'white'"></div>
+  </div>
+</div>
